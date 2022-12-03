@@ -1,0 +1,34 @@
+
+{% extends "templates/base.html" %}
+{% block content %}
+{% load bootstrap5 %}
+<style>
+    :root{
+    --primary--color : white;
+    --secondary--color:black
+  
+  
+  }
+  .black-theme{
+    --primary--color : #19283f;
+    --secondary--color:white
+  
+  }
+
+</style>
+
+<div class="container pt-5 " style="color: var(--secondary--color)">
+    <label style="color: var(--secondary--color)" >User</label>
+<input type="text" value="{{ticket.user}}" class="form-control" placeholder="user" readonly>
+    
+    <label >Message</label>
+<input type="text" value="{{ticket.question}}" class="form-control" placeholder="user" readonly>
+    <label >Time</label>
+<input type="text" value="{{ticket.createdat}}" class="form-control" placeholder="user" readonly>
+    
+<form method="post" style="color: var(--secondary--color)">
+    {% csrf_token %}
+{% bootstrap_form form %}
+<button class="btn btn-info" type="submit">Send</button>
+</form></div>
+{% endblock content %}

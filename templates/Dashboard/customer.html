@@ -1,0 +1,36 @@
+{% extends "Dashboard/admin_base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="container">
+    <h2>   الاوردرات  </h2>
+<h3 class="text-center"> المستخدم : {{customer}} </h3>
+
+<div class="row">
+    <table class="table  table-striped  mb-5 pb-5">
+        <thead>
+          <tr>
+            <th scope="col">  رقم الاوردر</th>
+            <th scope="col"> التاريخ </th>
+            <th scope="col">محتويات الاوردر</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for o in orders  %} 
+
+          <tr>
+        <td>{{o}}</td>
+        <td>{{o.orderdate}}</td>
+        <td><a href="{% url 'order' o.id %}" class="btn btn-primary rounded-pill">عرض </a></td>
+        <td>{% if o.is_finished == True %} مكتمل  {% else %} غير مكتمل{% endif %}</td>
+          </tr> 
+{% endfor %}
+
+          
+        </tbody>
+    </table>
+
+
+{% endblock %}

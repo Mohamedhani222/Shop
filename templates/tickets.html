@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<div class="container pt-5">
+<form method="post" >
+    {% csrf_token %}
+  <input type="text" name="question" style="padding-bottom: 80px;"  placeholder="message" class="form-control">
+    <button class="btn btn-primary rounded-pill mt-3" type="submit">Send</button>
+  </form>
+  
+  {% if tickets %}
+  {% for ticket in tickets %}
+  
+   <div class="table-responsive pt-5">
+    <table class="table table-primary">
+      <thead>
+        <tr>
+          <th scope="col">Ticket ID</th>
+          <th scope="col">Time</th>
+          <th scope="col">Status</th>
+          <th scope="col">View Ticket</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row">{{ticket.id}}</td>
+          <td>{{ticket.createdat}}</td>
+          <td><a {% if ticket.status == 'pending' %} class="btn btn-warning" {% elif ticket.status == "answerd" %} class='btn btn-success' {% else %} class='btn btn-danger' {% endif %} >{{ticket.status}}</a> </h5></td>
+          <td><a href="{% url 'ticket' ticket.id %}" class="btn btn-primary">View</a></td>
+        </tr>
+      </tbody>
+    </table>
+   </div>
+   </div>
+  
+  
+  
+  
+  {% endfor %}
+  {% endif %}
+  
+
+
+{% endblock content %}
+

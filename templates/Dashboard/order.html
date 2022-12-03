@@ -1,0 +1,44 @@
+{% extends "Dashboard/admin_base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-3">
+    <h3>الاوردر رقم {{order_id}}</h3>
+    <h5 class="text-center">عدد المنتجات {{counterr}}</h5>
+<div class="row">
+    <table class="table  table-striped  mb-5 pb-5">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">   محتويات الاوردر </th>
+            <th scope="col"> التاريخ </th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            {% for x in ordetails %}
+ 
+
+          <tr>
+        <th scope="row">{{ forloop.counter }} </th>
+        <td>{{x}}</td>
+        <td>{{x.order.orderdate}}</td>
+          </tr> 
+{% endfor %}
+
+          
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "Dashboard/admin_base.html" %}
+{% load static %}
+{% load bootstrap5 %}
+{% block content %}
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
+
+<style>.swiper {
+  width: 600px;
+  height: 300px;
+}
+</style>
+
+
+<div class="container" style="margin-top:50px ;">
+<div style="text-align: center;">
+  {% if messages %}
+  <ul style="list-style: none ;" class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class=" alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+<p  style="font-size: 28px;background-color: black;padding: 15px;border-radius: 5px;color: white;">عدد المنتجات <span id="prpr">{{countpro}}</span></p></div>
+<h3 class="pb-3">اضف منتج</h3>
+<form method="post"  enctype="multipart/form-data" class="form mb-5" id='sform' > 
+  
+  {% csrf_token %}
+
+    {% bootstrap_form_errors add %}
+    {% bootstrap_form add %}
+
+    {% buttons %}
+
+      <button  type="submit" class="btn btn-primary" id="btn">اضافة</button>
+  {% endbuttons %}
+    </form>
+
+<h3 class="pb-3">المنتجات :</h3>
+<form method="GET" action="{% url 'admin-products' %}" class="form-inline ml-3">
+  <div class="input-group input-group-sm">
+    <input class="form-control form-control-navbar" name="search_name" type="search" placeholder="Search" aria-label="Search">
+    <div class="input-group-append">
+      <button class="btn btn-navbar" type="submit">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </div>
+</form>
+<table class="table  table-striped  mb-5 pb-5">
+      <thead>
+        <tr>
+          <th scope="col">رقم المنتج</th>
+          <th scope="col">اسم المنتج</th>
+          <th scope="col">تاريخ الاضافه</th>
+          <th scope="col">حذف</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for pro in products %}
+        
+        <tr id="display-{{pro.id}}">
+          <th scope="row">{{pro.id}}</th>
+          <td>{{pro.title}}</td>
+          <td>{{pro.createdat}}</td>
+          <td><a class ="btn btn-secondary rounded-pill" href="{% url 'del' pro.id %} " id="btn-{{pro.id}}">حذف</a></td>
+        </tr>
+
+        
+
+
+
+
+        <script type="text/javascript">
+          let cont =document.getElementById("prpr")
+          $(document).on("click" , '#btn-{{pro.id}}' ,function(e){
+            e.preventDefault();
+            $.ajax({
+              type:'GET',
+              url:"{% url 'del' pro.id %}",
+              processData: false,
+              contentType: false,
+              success:function(){
+                alertify.success("تم حذف المنتج "),         
+                $("#display-{{pro.id}}").empty()
+                let m =Number(cont.innerHTML)
+                --m
+                cont.innerHTML = m
+              },
+            })
+          })
+          
+          
+          </script>
+          
+        {% endfor %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+</div>
+<script>const swiper = new Swiper('.swiper', {
+  // Optional parameters
+  direction: 'vertical',
+  loop: true,
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+});
+</script>
+{% endblock content %}

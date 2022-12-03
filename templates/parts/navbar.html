@@ -1,0 +1,116 @@
+<style>
+.modis{
+display: none;
+}
+
+</style>
+
+
+<nav style="background-color:#19283f;" class="navbar navbar-expand-lg sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light " href="#">DCSHOP</a>
+      <button class="navbar-toggler" id="nav-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav text-light  me-auto mb-2 mb-lg-0">          {% if user.is_authenticated %}
+
+          <li class="nav-item">
+            <a class="nav-link active text-light " aria-current="page" href="{% url 'home' %}">Home</a>
+          </li>
+            
+          <li class="nav-item">
+            <a class="nav-link text-light " href="{% url 'index' %}">Products</a>
+          </li>          {% endif %}
+
+          <li class="nav-item dropdown text-light ">              
+            {% if user.is_authenticated %}
+            <a class="nav-link dropdown-toggle text-light " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Profile
+            </a>
+            <ul class="dropdown-menu">
+             <li><a class="dropdown-item"><i style="padding-right: 5px; padding-left: 0px; margin-left: -3px;" class="fa-solid fa-user"></i>{{user.username}}</a></li>
+             <li><a class="dropdown-item" href="{% url 'orders' %}">My Orders</a></li>
+              <li><a class="dropdown-item bg-dark text-light" href="{% url 'logout' %}">Logout</a></li>
+           {% comment %}   {% else %}
+              <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Join Us
+              </a>
+              <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+              <li><a class="dropdown-item" href="{% url 'register' %}">Sign Up</a></li>{% endcomment %} 
+                {% endif %}
+            </ul>
+            
+        </ul>
+          <li id="crt" class="d-lg-flex list-unstyled ">
+          {% if user.is_authenticated %}
+            <span><a class="p-3 text-light " href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a></span>
+            <span class="text-light" id="count">{{counter}}</span>
+          {% endif %}
+                </li>
+        <li id="theme" class="d-lg-flex list-unstyled " >
+          <button style=" background: none; border: none;"  class="text-light" id="butn"><i class="bi bi-moon-fill"></i></button>
+        
+        </li>
+      </ul>
+        </div>
+
+
+    </div>
+  </nav>
+
+
+  <script>
+let navbtn =document.getElementById("nav-btn")
+  let crt =document.getElementById("crt")
+  let theme =document.getElementById("theme")
+
+navbtn.onclick= function() {
+theme.classList.remove("d-sm-none" , "d-md-none")
+if (condition) {
+  
+}
+
+}
+
+let butn =document.getElementById("butn")
+// butn.onclick = function (){
+//     document.body.classList.toggle("black-theme")
+//     if (document.body.classList.contains("black-theme")) {
+//           
+//     }else{
+//      
+//     }
+//   }
+let dark =localStorage.getItem("darkmode")
+const enabledarkmode =function () {
+  document.body.classList.add("black-theme");
+  butn.innerHTML = "<i class='bi bi-brightness-high'></i>";
+
+  localStorage.setItem("darkmode" , 'enabled')
+};
+const disabledarkmode =function () {
+  document.body.classList.remove("black-theme");
+  butn.innerHTML = "<i class='bi bi-moon-fill'></i>"
+
+  localStorage.setItem("darkmode" , 'disabled')
+};
+
+
+if (dark === 'enabled') {
+  enabledarkmode();
+};
+
+butn.addEventListener("click" , function () {
+let darkmode =localStorage.getItem("darkmode")
+  if (darkmode !== "enabled") {
+    enabledarkmode()
+  }else{
+
+    disabledarkmode()
+  }
+
+});
+
+  </script>

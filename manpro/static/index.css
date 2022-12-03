@@ -1,0 +1,68 @@
+:root{
+    --primary--color : white;
+    --secondary--color:black
+  
+  
+  }
+  .black-theme{
+    --primary--color : #19283f;
+    --secondary--color:white
+  
+  }
+  
+  /* index Page  */
+  
+  *{
+    box-sizing: border-box;
+    font-family:  'Poppins', sans-serif;
+  }
+  
+  body{
+     height: 10000px;
+     font-family:  'Poppins', sans-serif;
+     background-color:var(--primary--color)
+  }
+  .info{
+      text-align: center;
+      justify-content: center;
+  
+  }
+  .description{
+  max-width: 500px;
+  }
+  .about i{
+    font-size: 50px;
+    padding-bottom: 8px;
+  }
+  
+  #scrollup{
+    position: fixed;
+    bottom: 8px;
+    right: 12px;
+    cursor: pointer;
+    color: var(--secondary--color);
+    font-size: 38px;
+    display: none;
+  }
+  .icons{
+    justify-content: space-between;
+    width: 32%;
+  }
+  .icons i {
+    cursor: pointer;
+  
+  }
+  .products h3{
+    text-align: center;
+    color: var(--secondary--color);
+  
+  
+  }
+  .infor{
+    color: var(--secondary--color);
+  }
+  .info{
+    color: var(--secondary--color);
+  
+  }
+  

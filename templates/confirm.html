@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+{% block content %}
+
+<style>
+  body{
+    background-color: darkgray;
+  }
+</style>
+
+
+<div class="container mt-5">
+<table class="table shadow mt-5 bg-white">
+    <thead>
+      <tr>
+        <th scope="col">Order ID</th>
+        <th scope="col">Product</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">status</th>
+      </tr>
+    </thead>
+    <tbody>
+                {% for item in all_orders  %}
+
+      <tr>
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.orderdate}}</td>
+        <td>{{item.counter}}</td>
+        <td>{{item.total}}</td>
+        <td>{{item.status}}</td>      
+      </tr> 
+
+        {% endfor %}
+
+    </tbody>
+  </table>  
+</div>
+
+{% endblock content %}
